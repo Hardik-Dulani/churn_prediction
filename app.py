@@ -41,7 +41,9 @@ with tabs[0]:
 with tabs[1]:
     import pandas as pd
 
-    st.title('File Upload')
+    st.header('File Upload')
+    st.info('Please make sure the data is in the correct format of raw-data with column names and their order as mentioned: CustomerID, Age, Gender, ContractType, MonthlyCharges, TotalCharges, TechSupport, InternetService, PaperlessBilling, PaymentMethod, Tenure')
+
 
     # File uploader widget
     try:
@@ -49,12 +51,29 @@ with tabs[1]:
 
         if uploaded_file is not None:
             # Determine file type and read accordingly
+            
             if uploaded_file.name.endswith('.csv'):
                 df = pd.read_csv(uploaded_file)
             elif uploaded_file.name.endswith(('.xlsx', '.xls')):
                 df = pd.read_excel(uploaded_file)
-        data = preprocess(df)
+            df1 = df.copy()
+            data = preprocess(df)
+            with open('churn_model.pkl', 'rb') as file:
+                model = pickle.load(file)
+            pred = model.predict(data)
+            df1['Churn'] = pred
+            csv = df1.to_csv(index=False)
+            
+            # Create download button
+            st.download_button(
+                label="Download the CSV with predictions",
+                data=csv,
+                file_name='data_with_predictions.csv',
+                mime='text/csv'
+            )
+        
     except Exception as e:
+        st.write(e)
         st.error('Not in the supported format')
 
 
