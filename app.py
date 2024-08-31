@@ -26,15 +26,18 @@ with tabs[0]:
         # Submit button
         submit_button = st.form_submit_button(label='Predict Churn')
         if submit_button:
-        
+            
             df = pd.DataFrame(data,index=[1])
             data = preprocess(df)
 
-            st.dataframe(data)
+            
             with open('churn_model.pkl', 'rb') as file:
                 model = pickle.load(file)
             pred = model.predict(data)
-            st.write(pred)
+            if pred[0] == 0:
+                st.success('Customer is Likely to Stay!')
+            else:
+                st.error('Customer is Likely to Churn!')
 
 
 
