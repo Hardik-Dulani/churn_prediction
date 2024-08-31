@@ -66,7 +66,7 @@ def preprocess(test_df):
     if 'TotalCharges' in test_df.columns:
         test_df['LogTotalCharges'] = np.log(test_df['TotalCharges'].replace(0, np.nan))  # Handle zero values to avoid log(0)
     
-    with open('default_values.pkl', 'rb') as file:
+    with open('Data/default_values.pkl', 'rb') as file:
         default_values = pickle.load(file)
 
     
