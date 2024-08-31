@@ -9,6 +9,7 @@ tabs = st.tabs(["Single Entry", "Bulk Prediction"])
 # Create content for each tab
 with tabs[0]:
     data = {}
+    st.subheader("Please fill out the form below with the customer details you have.")
     with st.form(key='churn_form'):
         # Input fields for each feature
         data['CustomerID'] = 0
