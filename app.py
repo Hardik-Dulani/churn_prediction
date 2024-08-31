@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 from helper import preprocess
 
-st.subheader("ThinkHumble's Customer Churn Prediction")
+st.subheader("Customer Churn Predictor")
 tabs = st.tabs(["Single Entry", "Bulk Prediction"])
 
 # Create content for each tab
