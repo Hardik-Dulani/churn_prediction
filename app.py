@@ -32,7 +32,7 @@ with tabs[0]:
             data = preprocess(df)
 
             
-            with open('churn_model.pkl', 'rb') as file:
+            with open('Data/churn_model.pkl', 'rb') as file:
                 model = pickle.load(file)
             pred = model.predict(data)
             if pred[0] == 0:
@@ -62,7 +62,7 @@ with tabs[1]:
                 df = pd.read_excel(uploaded_file)
             df1 = df.copy()
             data = preprocess(df)
-            with open('churn_model.pkl', 'rb') as file:
+            with open('Data/churn_model.pkl', 'rb') as file:
                 model = pickle.load(file)
             pred = model.predict(data)
             df1['Churn'] = pred
